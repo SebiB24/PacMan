@@ -1,10 +1,17 @@
 package Game;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import javax.swing.*;
 
-public class PacMan extends JPanel{
+public class PacMan extends JPanel implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        repaint();
+    }
 
     class Block{
         Image image;
@@ -73,6 +80,8 @@ public class PacMan extends JPanel{
             "XXXXXXXXXXXXXXXXXXX"
     };
 
+    Timer gameLoop;
+
     public PacMan(){
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setBackground(Color.BLACK);
@@ -90,6 +99,8 @@ public class PacMan extends JPanel{
 
 
         loadMap();
+        gameLoop = new Timer(50, this);
+        gameLoop.start();
     }
 
     private void loadMap(){
