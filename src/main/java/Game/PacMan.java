@@ -3,15 +3,79 @@ package Game;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashSet;
 import javax.swing.*;
 
-public class PacMan extends JPanel implements ActionListener {
+public class PacMan extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        move();
         repaint();
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("keyPressed: " + e.getKeyCode());
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+            pacman.updateDirection('U');
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+            pacman.updateDirection('D');
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            pacman.updateDirection('L');
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            pacman.updateDirection('R');
+        }
+
+        if(pacman.direction == 'U'){
+            pacman.image = pacmanUpImage;
+        }
+        else if(pacman.direction == 'D'){
+            pacman.image = pacmanDownImage;
+        }
+        else if(pacman.direction == 'L'){
+            pacman.image = pacmanLeftImage;
+        }
+        else if(pacman.direction == 'R'){
+            pacman.image = pacmanRightImage;
+        }
+    }
+
+    public void move(){
+        pacman.x += pacman.velocityX;
+        pacman.y += pacman.velocityY;
+
+        for(Block wall: walls){
+            if(collision(pacman, wall)){
+                pacman.x -= pacman.velocityX;
+                pacman.y -= pacman.velocityY;
+                break;
+            }
+        }
+    }
+
+    public boolean collision(Block a, Block b){
+        return a.x < b.x + b.width &&
+                a.x + a.width > b.x &&
+                a.y < b.y + b.height &&
+                a.y + a.height > b.y;
+    }
+
 
     class Block{
         Image image;
@@ -23,6 +87,10 @@ public class PacMan extends JPanel implements ActionListener {
         int startX;
         int startY;
 
+        char direction = 'U'; /// U:up  D:down  L:left  R:right
+        int velocityX;
+        int velocityY;
+
         Block(Image image, int x, int y, int width, int height){
             this.image = image;
             this.x = x;
@@ -31,6 +99,43 @@ public class PacMan extends JPanel implements ActionListener {
             this.height = height;
             this.startX = x;
             this.startY = y;
+        }
+
+        void updateDirection(char direction){
+            char prevDirection = this.direction;
+            this.direction = direction;
+            updateVelocity();
+            this.x += this.velocityX;
+            this.y += this.velocityY;
+            for(Block wall: walls){
+                if(collision(this, wall)){
+                    this.x -= this.velocityX;
+                    this.y -= this.velocityY;
+                    this.direction = prevDirection;
+                    updateVelocity();
+                    break;
+                }
+            }
+            updateVelocity();
+        }
+
+        void updateVelocity(){
+            if(direction == 'U'){
+                this.velocityX = 0;
+                this.velocityY = -tilesize/4;
+            }
+            else if(direction == 'D'){
+                this.velocityX = 0;
+                this.velocityY = tilesize/4;
+            }
+            else if(direction == 'L'){
+                this.velocityX = -tilesize/4;
+                this.velocityY = 0;
+            }
+            else if(direction == 'R'){
+                this.velocityX = tilesize/4;
+                this.velocityY = 0;
+            }
         }
     }
 
@@ -101,6 +206,8 @@ public class PacMan extends JPanel implements ActionListener {
         loadMap();
         gameLoop = new Timer(50, this);
         gameLoop.start();
+        addKeyListener(this);
+        setFocusable(true);  /// asigura ca programul care asculta pentru key press e pacman
     }
 
     private void loadMap(){

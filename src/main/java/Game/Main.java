@@ -2,8 +2,7 @@ package Game;
 
 import javax.swing.JFrame;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
         int rowCount = 21;
@@ -21,6 +20,8 @@ public class Main {
         PacMan pacmanGame = new PacMan();
         frame.add(pacmanGame);
         frame.pack();
+        pacmanGame.requestFocus(); /// legat de key press focus
         frame.setVisible(true);
     }
 }
+
