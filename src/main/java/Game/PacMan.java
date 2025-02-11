@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
+import java.util.Random;
 import javax.swing.*;
 
 public class PacMan extends JPanel implements ActionListener, KeyListener {
@@ -55,6 +56,8 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
             pacman.image = pacmanRightImage;
         }
     }
+    char[] Directions = {'U', 'D', 'L', 'R'};
+    Random rand = new Random();
 
     public void move(){
         pacman.x += pacman.velocityX;
@@ -66,6 +69,35 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
                 pacman.y -= pacman.velocityY;
                 break;
             }
+        }
+
+        checkAndWorp(pacman);
+
+        for(Block ghost: ghosts){
+
+            if(ghost.y == 9*tilesize && ghost.direction != 'U' && ghost.direction != 'D'){
+                ghost.updateDirection('U');
+            }
+            ghost.x += ghost.velocityX;
+            ghost.y += ghost.velocityY;
+            for(Block wall: walls){
+                if(collision(ghost, wall)){
+                    ghost.x -= ghost.velocityX;
+                    ghost.y -= ghost.velocityY;
+                    char newDirection = Directions[rand.nextInt(4)];
+                    ghost.updateDirection(newDirection);
+                }
+            }
+            checkAndWorp(ghost);
+        }
+    }
+
+    public void checkAndWorp(Block block){
+        if(block.x < -tilesize){
+            block.x = 19*tilesize;
+        }
+        else if(block.x > 19*tilesize){
+            block.x = -tilesize;
         }
     }
 
@@ -204,6 +236,12 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
 
 
         loadMap();
+
+        for(Block ghost: ghosts){
+            char newDirection = Directions[rand.nextInt(4)];
+            ghost.updateDirection(newDirection);
+        }
+
         gameLoop = new Timer(50, this);
         gameLoop.start();
         addKeyListener(this);
