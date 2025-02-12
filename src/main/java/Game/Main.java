@@ -11,7 +11,7 @@ public class Main {
         int boardWidth = columnCount * tilesize;
         int boardHeight = rowCount * tilesize;
 
-        JFrame frame = new JFrame("Game.PacMan");
+        JFrame frame = new JFrame("PacMan");
         frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

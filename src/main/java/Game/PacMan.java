@@ -10,7 +10,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class PacMan extends JPanel implements ActionListener, KeyListener {
-
+///----------------------------------------------------------- Key Listeners
     @Override
     public void actionPerformed(ActionEvent e) {
         move();
@@ -61,7 +61,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
             pacman.image = pacmanRightImage;
         }
     }
-
+/// ---------------------------------------------------------- Metode class PacMan
     public void restart(){
         loadMap();
         reset();
@@ -152,7 +152,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
                 a.y + a.height > b.y;
     }
 
-
+/// ---------------------------------------------------------- nested class Block
     class Block{
         Image image;
         int x;
@@ -219,6 +219,8 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
             }
         }
     }
+
+/// ---------------------------------------------------------- atribut class PacMan
     int score = 0;
     int lives = 3;
     boolean gameOver = false;
@@ -271,6 +273,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
 
     Timer gameLoop;
 
+/// -------------------------------------------------------------------- Constructor PacMan
     public PacMan(){
         setPreferredSize(new Dimension(boardWidth, boardHeight));
         setBackground(Color.BLACK);
@@ -300,6 +303,7 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);  /// asigura ca programul care asculta pentru key press e pacman
     }
 
+/// -------------------------------------------------------------------- Load Map
     private void loadMap(){
         walls = new HashSet<Block>();
         foods = new HashSet<Block>();
@@ -344,11 +348,13 @@ public class PacMan extends JPanel implements ActionListener, KeyListener {
         }
     }
 
+/// -------------------------------------------------------------------Paint Component
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
     }
+
 
     private void draw(Graphics g) {
         g.drawImage(pacman.image, pacman.x, pacman.y, pacman.width, pacman.height, null);
