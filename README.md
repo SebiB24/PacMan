@@ -22,7 +22,7 @@ This is a simple **Pac-Man clone** built using **Java and Swing**. The game feat
 - **Restart Game:** Press any key after Game Over
 
 ## 📸 Screenshots
-![GIF Description](/PacMan/pacman_preview.gif)
+![pacman_preview](https://github.com/user-attachments/assets/86b33d07-6ef1-490f-b707-781a287ca56c)
 
 ## 🔧 How it Works
 The game uses **Java Swing** for rendering and **KeyListeners** for handling input. The logic includes:
