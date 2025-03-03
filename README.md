@@ -1,6 +1,5 @@
 # Pac-Man Game in Java
 
-![Pac-Man](https://upload.wikimedia.org/wikipedia/en/2/2e/Pac-Man.png)
 
 ## 🎮 About the Game
 This is a simple **Pac-Man clone** built using **Java and Swing**. The game features a classic **grid-based movement system**, ghosts with randomized movement, collectible food items, and a score system. The goal is to **collect all the food items** while avoiding ghosts. If you lose all your lives, the game is over!
