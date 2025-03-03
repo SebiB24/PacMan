@@ -21,7 +21,7 @@ This is a simple **Pac-Man clone** built using **Java and Swing**. The game feat
 - **Arrow Keys (⬆️⬇️⬅️➡️):** Move Pac-Man in the desired direction
 - **Restart Game:** Press any key after Game Over
 
-## 📸 Screenshots
+## 📸 Preview
 ![pacman_preview](https://github.com/user-attachments/assets/86b33d07-6ef1-490f-b707-781a287ca56c)
 
 ## 🔧 How it Works
