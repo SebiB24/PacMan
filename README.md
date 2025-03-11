@@ -17,6 +17,11 @@ This is a simple **Pac-Man clone** built using **Java and Swing**. The game feat
 - Java Development Kit (JDK) installed (Java 8 or later)
 - An IDE like IntelliJ IDEA, Eclipse, or VS Code with Java support
 
+### **Running the Game**
+1. Clone this repository
+2. Open the project in your preferred Java IDE.
+3. Compile and run the `Main.java` file.
+
 ## 🎮 Controls
 - **Arrow Keys (⬆️⬇️⬅️➡️):** Move Pac-Man in the desired direction
 - **Restart Game:** Press any key after Game Over
